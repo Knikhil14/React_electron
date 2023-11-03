@@ -1,0 +1,15 @@
+
+> electron-with-create-react-app@0.1.0 start /home/nikhil/electron-with-create-react-app-
+> react-scripts start
+
+Starting the development server...
+
+Compiled successfully!
+
+The app is running at:
+
+  http://localhost:3000/
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+

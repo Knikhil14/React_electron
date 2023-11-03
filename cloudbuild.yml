@@ -1,0 +1,22 @@
+steps:
+  - name: 'node:14'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'npm install'
+  - name: 'node:14'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'npm run-script build'
+  - name: 'node:14'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'npm run electron-build'
+artifacts:
+  objects:
+    location: 'gs://your-bucket-name'
+    paths:
+      - 'build/**/*'
+      - 'electron-build/**/*'
