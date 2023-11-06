@@ -8,15 +8,15 @@ steps:
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'npm run-script build'
+      - 'npm install concurrently --save-dev'
   - name: 'node:14'
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'npm run electron-build'
+      - 'npm run build'
 artifacts:
   objects:
-    location: 'gs://your-bucket-name'
+    location: 'gs://us-central1.deploy-artifacts.nikhil-kolluri.appspot.com'
     paths:
       - 'build/**/*'
       - 'electron-build/**/*'
