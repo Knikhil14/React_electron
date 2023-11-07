@@ -1,17 +1,25 @@
 steps:
+  # Step 1: Install Node.js and Yarn
   - name: 'node:14'
     entrypoint: 'bash'
-    args:
-      - '-c'
-      - 'npm install'
-  - name: 'node:14'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - 'npm install concurrently --save-dev'
-  - name: 'node:14'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - 'npm run build'
+    args: ['-c', 'npm install -g yarn']
 
+  # Step 2: Install dependencies and build the React app with Yarn
+  - name: 'gcr.io/cloud-builders/yarn'
+    args: ['install']
+    dir: '/src/App'  # Specify the directory where your React app is located
+  - name: 'gcr.io/cloud-builders/yarn'
+    args: ['build']
+    dir: '/src/App'  # Specify the directory where your React app is located
+
+  # Step 3: Package Electron app
+  - name: 'gcr.io/cloud-builders/yarn'
+    args: ['install']
+  - name: 'gcr.io/cloud-builders/yarn'
+    args: ['run', 'electron-pack']
+
+  # Step 4: Store the built Electron app
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['-m', 'cp', '-r', 'out/', 'gs://us-central1.deploy-artifacts.nikhil-kolluri.appspot.com']
+
+timeout: 1200s  # Adjust as needed
