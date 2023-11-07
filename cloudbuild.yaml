@@ -23,12 +23,6 @@ steps:
       - 'run'
       - 'build'
 
-  # Step 4: Building the application for production
-  - name: 'gcr.io/cloud-builders/yarn'
-    entrypoint: 'npm'
-    args:
-      - 'start'
-
   # Step 5: Store the built Electron app
   - name: 'gcr.io/cloud-builders/gsutil'
     args: ['-m', 'cp', '-r', 'out/', 'gs://react_electron']
