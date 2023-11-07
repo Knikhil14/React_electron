@@ -23,5 +23,9 @@ steps:
       - 'run'
       - 'build'
 
+artifacts:
+    objects:
+      location: 'gs://react_electron/Output'
+      paths: ['**']
 
 timeout: 1200s  # Adjust as needed
