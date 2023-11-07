@@ -23,8 +23,10 @@ steps:
       - 'run'
       - 'build'
 
-  # Step 5: Store the built Electron app
-  - name: 'gcr.io/cloud-builders/gsutil'
-    args: ['-m', 'cp', '-r', 'out/', 'gs://react_electron']
+artifacts:
+  objects:
+    location: 'gs://react_electron'
+    paths:
+      - 'Output/**/*'
 
 timeout: 1200s  # Adjust as needed
