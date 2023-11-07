@@ -1,28 +1,34 @@
 logsBucket: 'gs://react_electron'
 
 steps:
-  # Step 1: Install Node.js and Yarn
+  # Step 1: Uninstall global Yarn if it exists
   - name: 'node:14'
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'npm uninstall -g yarn && npm install -g yarn'
+      - 'npm uninstall -g yarn'
 
-  # Step 2: Install concurrently and other dependencies
+  # Step 2: Install Node.js and Yarn
+  - name: 'node:14'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'npm install -g yarn'
+
+  # Step 3: Install dependencies
   - name: 'gcr.io/cloud-builders/yarn'
     entrypoint: 'bash'
     args:
       - '-c'
       - 'yarn add concurrently --save-dev'
 
-  # Step 3: Starting the electron apllication
+  # Step 4: Starting the application
   - name: 'gcr.io/cloud-builders/yarn'
     entrypoint: 'yarn'
     args:
-      - 'run'
       - 'start'
 
-  # Step 4: Building the electron application
+  # Step 5: Building the application for production
   - name: 'gcr.io/cloud-builders/yarn'
     entrypoint: 'yarn'
     args:
@@ -34,3 +40,4 @@ steps:
     args: ['-m', 'cp', '-r', 'out/', 'gs://react_electron']
 
 timeout: 1200s  # Adjust as needed
+
