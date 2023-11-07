@@ -7,24 +7,24 @@ steps:
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'npm install -g yarn'
+      - 'npm install'
 
   # Step 3: Install dependencies
-  - name: 'gcr.io/cloud-builders/yarn'
+  - name: 'gcr.io/cloud-builders/npm'
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'yarn add concurrently --save-dev'
+      - 'npm install concurrently --save-dev'
 
   # Step 4: Starting the application
-  - name: 'gcr.io/cloud-builders/yarn'
-    entrypoint: 'yarn'
+  - name: 'gcr.io/cloud-builders/npm'
+    entrypoint: 'npm'
     args:
       - 'start'
 
   # Step 5: Building the application for production
   - name: 'gcr.io/cloud-builders/yarn'
-    entrypoint: 'yarn'
+    entrypoint: 'npm'
     args:
       - 'run'
       - 'build'
