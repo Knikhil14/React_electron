@@ -1,3 +1,5 @@
+logsBucket: 'gs://react_electron'
+
 steps:
   # Step 1: Install Node.js and Yarn
   - name: 'node:14'
@@ -20,6 +22,6 @@ steps:
 
   # Step 4: Store the built Electron app
   - name: 'gcr.io/cloud-builders/gsutil'
-    args: ['-m', 'cp', '-r', 'out/', 'gs://us-central1.deploy-artifacts.nikhil-kolluri.appspot.com']
+    args: ['-m', 'cp', '-r', 'out/', 'gs://react_electron']
 
 timeout: 1200s  # Adjust as needed
