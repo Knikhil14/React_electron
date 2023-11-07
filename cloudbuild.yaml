@@ -6,14 +6,14 @@ steps:
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'npm uninstall -g yarn'
+      - 'sudo npm uninstall -g yarn'
 
   # Step 2: Install Node.js and Yarn
   - name: 'node:14'
     entrypoint: 'bash'
     args:
       - '-c'
-      - 'npm install -g yarn'
+      - 'sudo npm install -g yarn'
 
   # Step 3: Install dependencies
   - name: 'gcr.io/cloud-builders/yarn'
@@ -40,4 +40,3 @@ steps:
     args: ['-m', 'cp', '-r', 'out/', 'gs://react_electron']
 
 timeout: 1200s  # Adjust as needed
-
