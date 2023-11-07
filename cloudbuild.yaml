@@ -1,12 +1,6 @@
 logsBucket: 'gs://react_electron'
 
 steps:
-  # Step 1: Uninstall global Yarn if it exists
-  - name: 'node:14'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - 'sudo npm uninstall -g yarn'
 
   # Step 2: Install Node.js and Yarn
   - name: 'node:14'
