@@ -4,7 +4,7 @@ steps:
   # Step 1: Install Node.js and Yarn
   - name: 'node:14'
     entrypoint: 'bash'
-    args: ['-c', 'npm install -g yarn']
+    args: ['-c', 'npm uninstall -g yarn && yarn global add yarn']
 
   # Step 2: Install dependencies and build the React app with Yarn
   - name: 'gcr.io/cloud-builders/yarn'
