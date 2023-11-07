@@ -2,34 +2,34 @@ logsBucket: 'gs://react_electron'
 
 steps:
 
-  # Step 2: Install Node.js and Yarn
+  # Step 1: Install Node.js and Yarn
   - name: 'node:14'
     entrypoint: 'bash'
     args:
       - '-c'
       - 'npm install'
 
-  # Step 3: Install dependencies
+  # Step 2: Install dependencies
   - name: 'gcr.io/cloud-builders/npm'
     entrypoint: 'bash'
     args:
       - '-c'
       - 'npm install concurrently --save-dev'
 
-  # Step 4: Starting the application
+  # Step 3: Starting the application
   - name: 'gcr.io/cloud-builders/npm'
-    entrypoint: 'npm'
-    args:
-      - 'start'
-
-  # Step 5: Building the application for production
-  - name: 'gcr.io/cloud-builders/yarn'
     entrypoint: 'npm'
     args:
       - 'run'
       - 'build'
 
-  # Step 4: Store the built Electron app
+  # Step 4: Building the application for production
+  - name: 'gcr.io/cloud-builders/yarn'
+    entrypoint: 'npm'
+    args:
+      - 'start'
+
+  # Step 5: Store the built Electron app
   - name: 'gcr.io/cloud-builders/gsutil'
     args: ['-m', 'cp', '-r', 'out/', 'gs://react_electron']
 
