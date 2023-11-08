@@ -29,6 +29,6 @@ steps:
 artifacts:
     objects:
       location: 'gs://react_electron'
-      paths: ['*']
+      paths: ['react_electron/Artifact']
 
 timeout: 1200s  # Adjust as needed
