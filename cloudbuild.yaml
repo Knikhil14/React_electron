@@ -1,7 +1,4 @@
-logsBucket: 'gs://react_electron'
-
 steps:
-
   # Step 1: Install Node.js and Yarn
   - name: 'node:14'
     entrypoint: 'bash'
@@ -23,9 +20,13 @@ steps:
       - 'run'
       - 'build'
 
+  # Step 4: Adding the Storage bucket
+  - name: 'gcr.io/cloud-builders/gsutil'
+    args: ['-m', 'rsync', '-r', '.', 'gs://react_electron']
+
 artifacts:
     objects:
-      location: 'gs://react_electron/Output'
-      paths: ['**']
+      location: 'gs://react_electron'
+      paths: ['*']
 
 timeout: 1200s  # Adjust as needed
