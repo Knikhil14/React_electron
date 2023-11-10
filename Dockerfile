@@ -2,19 +2,16 @@
 FROM node:14
 
 # Set the working directory in the container
-WORKDIR /usr/src/app
+WORKDIR /src/app
 
-# Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
+# Copy all files from the current directory to the container
+COPY . .
 
 # Install Node.js dependencies
 RUN npm install
 
 # Install concurrently as a development dependency
 RUN npm install concurrently --save-dev
-
-# Copy all files from the current directory to the container
-COPY . .
 
 # Build the application
 RUN npm run build
