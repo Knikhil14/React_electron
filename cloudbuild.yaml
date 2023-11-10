@@ -21,7 +21,7 @@ steps:
     args:
       - 'run'
       - 'build'
-	  
+
   # Step 4 : Storing the artifact in docker image formate  
   - name: 'gcr.io/cloud-builders/docker'
     args: 
