@@ -16,7 +16,7 @@ RUN npm install concurrently --save-dev
 # Build the application
 RUN npm run build
 
-# Example: If you want to use the copied Dockerfile to run the application,
+# Example: If you want to use the copied Dockerfile to run the application
 # you can add a CMD instruction
  CMD ["npm", "start"]
 
