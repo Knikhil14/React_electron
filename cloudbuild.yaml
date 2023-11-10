@@ -33,7 +33,7 @@ steps:
       - 'deploy'
       - 'react-electron'
       - '--image=gcr.io/nikhil-kolluri/github.com/knikhil14/react_electron:$COMMIT_SHA'
-      - '--region=us-central10
+      - '--region=us-central1'
 
 
 artifacts:
