@@ -22,18 +22,25 @@ steps:
       - 'run'
       - 'build'
 
-  # Step 4 : Storing the artifact in docker image formate  
+  # Step 4 : Storing the artifact in docker image formate 
   - name: 'gcr.io/cloud-builders/docker'
-    args: 
+    args:
       - 'build'
       - '-t'
-      - 'gcr.io/nikhil-kolluri/github.com/knikhil14/react_electron:$COMMIT_SHA'
+      - 'gcr.io/nikhil-kolluri/github.com:$COMMIT_SHA'
       - '.'
 
   - name: 'gcr.io/cloud-builders/docker'
-    args: 
+    args:
       - 'push'
       - 'gcr.io/nikhil-kolluri/github.com:$COMMIT_SHA'
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'deploy'
+      - 'react-electron'
+      - '--image=gcr.io/nikhil-kolluri/github.com:$COMMIT_SHA'
+      - '--region=us-central1'
 
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
@@ -42,6 +49,7 @@ steps:
       - 'react-electron'
       - '--image=gcr.io/nikhil-kolluri/github.com:$COMMIT_SHA'
       - '--region=us-central1'
+
 
 
 artifacts:
