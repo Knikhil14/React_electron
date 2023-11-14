@@ -33,7 +33,7 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: 
       - 'push'
-      - 'gcr.io/nikhil-kolluri/github.com/knikhil14/react_electron:$COMMIT_SHA'
+      - 'gcr.io/nikhil-kolluri/github.com:$COMMIT_SHA'
 
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
