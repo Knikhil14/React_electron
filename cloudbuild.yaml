@@ -27,27 +27,28 @@ steps:
     args:
       - 'build'
       - '-t'
-      - 'gcr.io/nikhil-kolluri/github.com:$COMMIT_SHA'
+      - 'gcr.io/nikhil-kolluri/github.com/knikhil14/react_electron:$COMMIT_SHA'
       - '.'
 
   - name: 'gcr.io/cloud-builders/docker'
     args:
       - 'push'
-      - 'gcr.io/nikhil-kolluri/github.com:$COMMIT_SHA'
+      - 'gcr.io/nikhil-kolluri/github.com/knikhil14/react_electron:$COMMIT_SHA'
 
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
       - 'deploy'
       - 'react-electron'
-      - '--image=gcr.io/nikhil-kolluri/github.com:$COMMIT_SHA'
+      - '--image=gcr.io/nikhil-kolluri/github.com/knikhil14/react_electron:$COMMIT_SHA'
       - '--region=us-central1'
 
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
+      - 'beta'
       - 'run'
       - 'deploy'
       - 'react-electron'
-      - '--image=gcr.io/nikhil-kolluri/github.com:$COMMIT_SHA'
+      - '--image=gcr.io/nikhil-kolluri/github.com/knikhil14/react_electron:$COMMIT_SHA'
       - '--region=us-central1'
 
 
