@@ -35,16 +35,20 @@ steps:
       - 'push'
       - 'gcr.io/nikhil-kolluri/github.com/knikhil14/react_electron:$COMMIT_SHA'
 
+   - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - 'gcloud components update --quiet && gcloud components install beta --quiet'   
+
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
+      - 'beta'
       - 'deploy'
       - 'react-electron'
       - '--image=gcr.io/nikhil-kolluri/github.com/knikhil14/react_electron:$COMMIT_SHA'
       - '--region=us-central1'
-
   
-
-
 
 artifacts:
     objects:
@@ -52,3 +56,4 @@ artifacts:
       paths: ['*']
 
 timeout: 1200s  # Adjust as needed
+ 
