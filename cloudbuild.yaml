@@ -35,7 +35,7 @@ steps:
       - 'push'
       - 'gcr.io/nikhil-kolluri/github.com/knikhil14/react_electron:$COMMIT_SHA'
 
-   - name: 'gcr.io/cloud-builders/gcloud'
+  - name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
     args:
       - '-c'
