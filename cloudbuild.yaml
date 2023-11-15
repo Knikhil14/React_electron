@@ -1,17 +1,53 @@
+logsBucket: 'gs://react-electron_logs'
+
 steps:
+  # Step 1: Install Node.js and Yarn
   - name: 'node:14'
     entrypoint: 'bash'
     args:
       - '-c'
       - 'npm install'
-  - name: 'node:14'
+
+  # Step 2: Install dependencies
+  - name: 'gcr.io/cloud-builders/npm'
     entrypoint: 'bash'
     args:
       - '-c'
       - 'npm install concurrently --save-dev'
-  - name: 'node:14'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - 'npm run build'
 
+  # Step 3: Starting the application
+  - name: 'gcr.io/cloud-builders/npm'
+    entrypoint: 'npm'
+    args:
+      - 'run'
+      - 'build'
+
+  # Step 4 : Storing the artifact in docker image formate 
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - 'gcr.io/nikhil-kolluri/github.com/knikhil14/react_electron:$COMMIT_SHA'
+      - '.'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'push'
+      - 'gcr.io/nikhil-kolluri/github.com/knikhil14/react_electron:$COMMIT_SHA'
+
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'react-electron'
+      - '--image=gcr.io/nikhil-kolluri/github.com/knikhil14/react_electron:$COMMIT_SHA'
+      - '--region=us-central1'
+
+
+artifacts:
+    objects:
+      location: 'gs://react_electron'
+      paths: ['*']
+
+timeout: 1200s  # Adjust as needed
+ 
