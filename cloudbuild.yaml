@@ -35,20 +35,17 @@ steps:
       - 'push'
       - 'gcr.io/nikhil-kolluri/github.com/knikhil14/react_electron:$COMMIT_SHA'
 
+deploy:
+  # Deploy to Cloud Deploy
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
       - 'deploy'
-      - 'react-electron-pipeline'
-      - '--image=gcr.io/nikhil-kolluri/github.com/knikhil14/react_electron:$COMMIT_SHA'
-      - '--region=us-central1'
-
-  - name: 'gcr.io/cloud-builders/gcloud'
-    args:
-      - 'run'
-      - 'deploy'
-      - 'react-electron'
-      - '--image=gcr.io/nikhil-kolluri/github.com/knikhil14/react_electron:$COMMIT_SHA'
-      - '--region=us-central1'
+      - 'react-electron-pipeline'  # Replace with your deployment name
+      - '--image=gcr.io/nikhil-kolluri/github.com/knikhil14/react_electron:$COMMIT_SHA'  # Replace with your Docker image URL
+      - '--region=us-central1'  # Replace with your desired region
+      - '--platform=managed'  # Replace with your desired deployment platform (e.g., "managed" or "gke")
+      - '--allow-unauthenticated'  # Adjust as needed
+  
 
 
 artifacts:
